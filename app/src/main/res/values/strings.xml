@@ -72,4 +72,8 @@
     <string name="battery_format"><xliff:g id="percentage" example="100">%1$d%%</xliff:g></string>
     <string name="memory_format"><xliff:g id="percentage" example="100">%1$d%%</xliff:g></string>
 
+    <string name="in_game_calls_title">In-game call</string>
+    <string name="in_game_calls_no_action">No action</string>
+    <string name="in_game_calls_auto_answer">Auto answer</string>
+    <string name="in_game_calls_auto_reject">Auto reject</string>
 </resources>
