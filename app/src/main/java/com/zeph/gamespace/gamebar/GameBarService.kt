@@ -41,6 +41,7 @@ import com.android.systemui.screenrecord.IRecordingCallback
 import dagger.hilt.android.AndroidEntryPoint
 import com.zeph.gamespace.R
 import com.zeph.gamespace.data.AppSettings
+import com.zeph.gamespace.settings.SettingsActivity
 import com.zeph.gamespace.utils.ScreenUtils
 import com.zeph.gamespace.utils.dp
 import com.zeph.gamespace.utils.registerDraggableTouchListener
@@ -340,6 +341,10 @@ class GameBarService : Hilt_GameBarService() {
         val actionPanel = rootBarView.findViewById<ImageButton>(R.id.action_panel)
         actionPanel.setOnClickListener {
             showPanel = !showPanel
+        }
+        actionPanel.setOnLongClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            true
         }
     }
 
