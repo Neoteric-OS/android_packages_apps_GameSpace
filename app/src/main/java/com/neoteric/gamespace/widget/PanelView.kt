@@ -28,7 +28,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
@@ -36,7 +35,6 @@ import android.widget.TextView
 import androidx.core.view.doOnLayout
 import com.neoteric.gamespace.R
 import com.neoteric.gamespace.utils.dp
-import com.neoteric.gamespace.utils.isPortrait
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import kotlin.math.max
@@ -112,23 +110,14 @@ class PanelView @JvmOverloads constructor(
     }
 
     private fun applyRelativeLocation() {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        layoutParams.height =
-            if (wm.isPortrait()) wm.maximumWindowMetrics.bounds.height() / 2 else LayoutParams.MATCH_PARENT
-
         doOnLayout {
             if (defaultY == null)
                 defaultY = y
 
-            y = if (wm.isPortrait()) {
-                val safeArea = rootWindowInsets.getInsets(WindowInsets.Type.systemBars())
-                val minY = safeArea.top + 16.dp
-                val maxY = safeArea.top + (parent as View).height - safeArea.bottom - height - 16.dp
-                min(max(relativeY, minY), maxY).toFloat()
-            } else {
-                defaultY ?: 16f
-            }
-
+	    val safeArea = rootWindowInsets.getInsets(WindowInsets.Type.systemBars())
+            val minY = safeArea.top + 16.dp
+            val maxY = safeArea.top + (parent as View).height - safeArea.bottom - height - 16.dp
+            y = min(max(relativeY, minY), maxY).toFloat()
         }
     }
 
