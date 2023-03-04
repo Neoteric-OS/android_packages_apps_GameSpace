@@ -37,9 +37,6 @@ import com.neoteric.gamespace.R
 import com.neoteric.gamespace.utils.dp
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import kotlin.math.max
-import kotlin.math.min
-
 
 class PanelView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -117,7 +114,7 @@ class PanelView @JvmOverloads constructor(
 	    val safeArea = rootWindowInsets.getInsets(WindowInsets.Type.systemBars())
             val minY = safeArea.top + 16.dp
             val maxY = safeArea.top + (parent as View).height - safeArea.bottom - height - 16.dp
-            y = min(max(relativeY, minY), maxY).toFloat()
+	    y = relativeY.coerceIn(minY, maxY).toFloat()
         }
     }
 
