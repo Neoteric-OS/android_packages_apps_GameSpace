@@ -43,7 +43,7 @@
             android:summary="%s"
             android:title="@string/in_game_calls_title" />
 
-        <com.zeph.support.preference.SystemSettingSwitchPreference
+        <org.zeph.support.preference.SystemSettingSwitchPreference
             android:key="gamespace_suppress_fullscreen_intent"
             android:summary="@string/suppress_fullscreen_intent_summary"
             android:title="@string/suppress_fullscreen_intent_title" />
@@ -76,7 +76,7 @@
             android:key="gamespace_adb_disabled"
             android:title="@string/adb_disabled_title" />
 
-        <com.zeph.support.preference.CustomSeekBarPreference
+        <org.zeph.support.preference.CustomSeekBarPreference
             android:key="gamespace_menu_opacity"
             android:title="@string/gamespace_menu_opacity_title"
             android:defaultValue="100"
