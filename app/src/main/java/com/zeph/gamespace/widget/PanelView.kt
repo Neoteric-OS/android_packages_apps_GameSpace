@@ -21,7 +21,9 @@ import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
 import android.provider.Settings
-import android.os.SystemProperties
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.BatteryManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -57,35 +59,17 @@ class PanelView @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         applyRelativeLocation()
-        cpuTemperature()
+	batteryTemperature()
         brightnessSlider()
     }
 
-    private fun getCpuTemperature(): Float {
-        val process: Process
-        val prop = SystemProperties.get("ro.pb.cpu_no")
-        return try {
-            process = Runtime.getRuntime().exec("cat sys/class/thermal/thermal_zone$prop/temp")
-            process.waitFor()
-            val reader = BufferedReader(InputStreamReader(process.inputStream))
-            val line: String = reader.readLine()
-            if (line != null) {
-                val temp = line.toFloat()
-                temp / 1000.0f
-            } else {
-                51.0f
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            0.0f
-        }
-    }
-
-    private fun cpuTemperature() {
-        val temp = getCpuTemperature()
+    private fun batteryTemperature() {
+        val intent: Intent =
+            context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))!!
+        val temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0).toInt() / 10
         val degree = "\u2103"
-        val cpuTemp:TextView = findViewById(R.id.cpuTemp)
-        cpuTemp.text = "$temp$degree"
+        val batteryTemp:TextView = findViewById(R.id.batteryTemp)
+        batteryTemp.text = "$temp$degree"
     }
 
     private fun brightnessSlider() {
