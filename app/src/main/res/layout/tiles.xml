@@ -23,27 +23,27 @@
     android:columnCount="3"
     android:orientation="horizontal">
 
-    <com.blaster.gamespace.widget.tiles.GameModeTile
+    <com.zeph.gamespace.widget.tiles.GameModeTile
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.blaster.gamespace.widget.tiles.HeadsupTile
+    <com.zeph.gamespace.widget.tiles.HeadsupTile
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.blaster.gamespace.widget.tiles.FPSInfoTile
+    <com.zeph.gamespace.widget.tiles.FPSInfoTile
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.blaster.gamespace.widget.tiles.StayAwakeTile
+    <com.zeph.gamespace.widget.tiles.StayAwakeTile
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.blaster.gamespace.widget.tiles.LockGestureTile
+    <com.zeph.gamespace.widget.tiles.LockGestureTile
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.blaster.gamespace.widget.tiles.AutoBrightnessTile
+    <com.zeph.gamespace.widget.tiles.AutoBrightnessTile
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

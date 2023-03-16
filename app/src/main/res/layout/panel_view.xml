@@ -63,7 +63,7 @@
                     android:textSize="14sp"
                     android:textColor="?android:attr/textColorPrimaryInverse" />
 
-                 <com.blaster.gamespace.widget.MemoryView
+                 <com.zeph.gamespace.widget.MemoryView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
@@ -84,7 +84,7 @@
                     android:drawablePadding="2dp"
                     android:textSize="14sp" />
 
-                <com.blaster.gamespace.widget.BatteryView
+                <com.zeph.gamespace.widget.BatteryView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
