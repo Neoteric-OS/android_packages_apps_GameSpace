@@ -48,10 +48,6 @@ import com.neoteric.gamespace.utils.registerDraggableTouchListener
 import com.neoteric.gamespace.utils.statusbarHeight
 import com.neoteric.gamespace.widget.MenuSwitcher
 import com.neoteric.gamespace.widget.PanelView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint(Service::class)
@@ -62,7 +58,6 @@ class GameBarService : Hilt_GameBarService() {
     @Inject
     lateinit var screenUtils: ScreenUtils
 
-    private val scope = CoroutineScope(Job() + Dispatchers.Main)
     private val wm by lazy { getSystemService(WINDOW_SERVICE) as WindowManager }
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
@@ -148,8 +143,8 @@ class GameBarService : Hilt_GameBarService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         when (intent?.action) {
-            ACTION_STOP -> onActionStop()
-            ACTION_START -> onActionStart()
+            ACTION_STOP -> onGameLeave()
+            ACTION_START -> onGameStart()
         }
         return START_STICKY
     }
@@ -161,7 +156,7 @@ class GameBarService : Hilt_GameBarService() {
     }
 
     override fun onDestroy() {
-        onActionStop()
+        onGameLeave()
         super.onDestroy()
     }
 
@@ -179,26 +174,38 @@ class GameBarService : Hilt_GameBarService() {
     }
 
     // for client service
-    fun onGameStart() = scope.launch { onActionStart() }
-    fun onGameLeave() = scope.launch { onActionStop() }
-
-    private fun onActionStart() {
+    fun onGameStart() {
         shouldClose = false
         rootBarView.isVisible = false
         rootBarView.alpha = 0f
-        if (!rootBarView.isAttachedToWindow) {
-            wm.addView(rootBarView, barLayoutParam)
-        }
+        updateRootBarView()
         handler.postDelayed(firstPaint, 500)
     }
 
-    private fun onActionStop() {
+    fun onGameLeave() {
         shouldClose = true
         if (::rootPanelView.isInitialized && rootPanelView.isAttachedToWindow) {
             wm.removeViewImmediate(rootPanelView)
         }
-        if (rootBarView.isAttachedToWindow) {
+        if (::rootBarView.isInitialized && rootBarView.isAttachedToWindow) {
             wm.removeViewImmediate(rootBarView)
+        }
+    }
+
+    private fun updateRootBarView() {
+        if (!::rootBarView.isInitialized) return
+
+        // Try to remove and add the view manually to avoid animation jumps.
+        // Otherwise, use updateViewLayout
+        try {
+            if (rootBarView.isAttachedToWindow) {
+                wm.removeViewImmediate(rootBarView)
+            }
+            wm.addView(rootBarView, barLayoutParam)
+        } catch (_: RuntimeException) {
+            if (rootBarView.isAttachedToWindow) {
+                wm.updateViewLayout(rootBarView, barLayoutParam)
+            }
         }
     }
 
@@ -270,14 +277,7 @@ class GameBarService : Hilt_GameBarService() {
         updateContainerGaps()
         menuSwitcher.showFps = if (barExpanded) false else appSettings.showFps
         menuSwitcher.updateIconState(barExpanded, barLayoutParam.x)
-        try {
-            if (rootBarView.isAttachedToWindow) {
-                wm.removeView(rootBarView)
-            }
-            wm.addView(rootBarView, barLayoutParam)
-        } catch (_: IllegalStateException) {
-            wm.updateViewLayout(rootBarView, barLayoutParam)
-        }
+        updateRootBarView()
     }
 
     private fun setupPanelView() {
