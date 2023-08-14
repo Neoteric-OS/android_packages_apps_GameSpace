@@ -48,30 +48,30 @@
             android:summary="@string/suppress_fullscreen_intent_summary"
             android:title="@string/suppress_fullscreen_intent_title" />
 
-        <SwitchPreference
+        <org.zeph.support.preference.SwitchPreference
             android:defaultValue="false"
             android:key="gamespace_stay_awake"
             android:title="@string/stay_awake_title" />
 
-        <SwitchPreference
+        <org.zeph.support.preference.SwitchPreference
             android:defaultValue="false"
             android:key="gamespace_lock_gesture"
             android:title="@string/lock_gesture_title" />
 
-        <SwitchPreference
+        <org.zeph.support.preference.SwitchPreference
             android:key="gamespace_heads_up_disabled"
             android:title="@string/heads_up_disabled_title" />
 
-        <SwitchPreference
+        <org.zeph.support.preference.SwitchPreference
             android:key="gamespace_auto_brightness_disabled"
             android:title="@string/auto_brightness_disabled_title" />
 
-        <SwitchPreference
+        <org.zeph.support.preference.SwitchPreference
             android:defaultValue="false"
             android:key="gamespace_tfgesture_disabled"
             android:title="@string/three_screenshot_disabled_title" />
 
-        <SwitchPreference
+        <org.zeph.support.preference.SwitchPreference
             android:defaultValue="false"
             android:key="gamespace_adb_disabled"
             android:title="@string/adb_disabled_title" />
