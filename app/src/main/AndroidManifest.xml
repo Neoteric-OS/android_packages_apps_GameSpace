@@ -16,7 +16,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.zeph.gamespace"
+    package="com.neoteric.gamespace"
     android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -66,8 +66,8 @@
             android:exported="true"
             android:permission="android.permission.MANAGE_GAME_MODE">
             <intent-filter>
-                <action android:name="com.zeph.gamespace.action.GAME_START" />
-                <action android:name="com.zeph.gamespace.action.GAME_STOP" />
+                <action android:name="com.neoteric.gamespace.action.GAME_START" />
+                <action android:name="com.neoteric.gamespace.action.GAME_STOP" />
             </intent-filter>
         </receiver>
     </application>
