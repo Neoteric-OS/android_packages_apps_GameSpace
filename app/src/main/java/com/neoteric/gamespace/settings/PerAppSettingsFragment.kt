@@ -22,7 +22,7 @@ import android.view.View
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
+import org.neoteric.preference.SwitchPreference
 import dagger.hilt.android.AndroidEntryPoint
 import com.neoteric.gamespace.R
 import com.neoteric.gamespace.data.GameConfig
