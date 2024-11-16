@@ -140,7 +140,7 @@ class SessionService : Hilt_SessionService() {
                 // something is not right, bailing out
                 stopSelf()
             }
-            val app = commandIntent.getStringExtra(EXTRA_PACKAGE_NAME)
+            val app = commandIntent.getStringExtra(EXTRA_PACKAGE_NAME)!!
             session.register(app)
             applyGameModeConfig(app)
             gameBar.onGameStart()

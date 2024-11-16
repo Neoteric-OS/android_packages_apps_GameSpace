@@ -110,13 +110,13 @@ class AppSelectorFragment : Hilt_AppSelectorFragment(), SearchView.OnQueryTextLi
         return false
     }
 
-    override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+    override fun onMenuItemActionExpand(item: MenuItem): Boolean {
         appBarLayout?.setExpanded(false, false)
         appListView?.let { ViewCompat.setNestedScrollingEnabled(it, false) }
         return true
     }
 
-    override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+    override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
         appBarLayout?.setExpanded(false, false)
         appListView?.let { ViewCompat.setNestedScrollingEnabled(it, true) }
         return true

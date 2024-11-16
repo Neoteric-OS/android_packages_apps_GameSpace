@@ -48,7 +48,7 @@ class BatteryView @JvmOverloads constructor(
     }
 
     init {
-        val batteryManager = context.getSystemService(BatteryManager::class.java)
+        val batteryManager = context.getSystemService(BatteryManager::class.java)!!
         text = context.getString(
             R.string.battery_format,
             batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)

@@ -68,12 +68,12 @@ class PanelView @JvmOverloads constructor(
             context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))!!
         val temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0).toInt() / 10
         val degree = "\u2103"
-        val batteryTemp:TextView = findViewById(R.id.batteryTemp)
+        val batteryTemp:TextView = findViewById(R.id.batteryTemp)!!
         batteryTemp.text = "$temp$degree"
     }
 
     private fun brightnessSlider() {
-        var lightBar:SeekBar = findViewById(R.id.seekBar);
+        var lightBar:SeekBar = findViewById(R.id.seekBar)!!
         var brightness = Settings.System.getInt(
             context.contentResolver,
             Settings.System.SCREEN_BRIGHTNESS, 0

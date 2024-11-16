@@ -39,7 +39,7 @@ class GameBroadcastReceiver : BroadcastReceiver() {
 
     private fun Context.onGameStart(intent: Intent) {
         handler.post { resendBroadcast(intent) }
-        val app = intent.getStringExtra(SessionService.EXTRA_PACKAGE_NAME)
+        val app = intent.getStringExtra(SessionService.EXTRA_PACKAGE_NAME)!!
         SessionService.start(this, app)
     }
 
